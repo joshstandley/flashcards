@@ -1,0 +1,107 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Typography */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Utility Classes */
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+}
+
+.navbar-menu-item {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .navbar-menu-item {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/* Footer Styles */
+.footer {
+  text-align: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  color: #555;
+  margin-top: auto; /* Ensures footer stays at the bottom */
+}
+
+/* Home Page Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.home-main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.home-main p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .home-main h1 {
+    font-size: 2rem;
+  }
+  .home-main p {
+    font-size: 1rem;
+  }
+}
