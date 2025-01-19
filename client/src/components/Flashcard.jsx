@@ -1,30 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../styles/Flashcard.css';
 
 const Flashcard = ({ question, answer, resetAll }) => {
-  const [flipped, setFlipped] = useState(false);
   const cardRef = useRef(null);
 
-  // Reset the flip state without animation when resetAll changes
+  // Reset the card instantly when resetAll changes
   useEffect(() => {
     if (cardRef.current) {
-      cardRef.current.classList.add('no-transition'); // Temporarily disable transitions
-      cardRef.current.classList.remove('flipped'); // Ensure the card is not flipped
-      setTimeout(() => {
-        cardRef.current.classList.remove('no-transition'); // Re-enable transitions
-      }, 0); // Allow DOM update before removing the class
+      cardRef.current.classList.remove('flipped'); // Ensure the card is reset to the question side
     }
-    setFlipped(false);
   }, [resetAll]);
 
   const handleFlip = () => {
-    setFlipped((prev) => !prev); // Toggle the flip state
+    if (cardRef.current) {
+      cardRef.current.classList.toggle('flipped'); // Toggle the flip state
+    }
   };
 
   return (
     <div
       ref={cardRef}
-      className={`flashcard ${flipped ? 'flipped' : ''}`}
+      className="flashcard"
       onClick={handleFlip}
     >
       <div className="flashcard-front">
