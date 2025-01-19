@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { getDecks, deleteDeck } from '../utils/deckUtils';
+import '../styles/DecksPage.css';
 
 const DecksPage = () => {
   const [decks, setDecks] = useState([]);
