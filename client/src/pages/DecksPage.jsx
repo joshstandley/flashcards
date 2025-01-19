@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { getDecks, saveDeck, deleteDeck } from '../utils/deckUtils';
@@ -9,35 +10,33 @@ const DecksPage = () => {
   const [decks, setDecks] = useState([]);
   const [newDeckName, setNewDeckName] = useState('');
   const [newDeckDescription, setNewDeckDescription] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  // Load decks from localStorage on component mount
   useEffect(() => {
     setDecks(getDecks());
   }, []);
 
-  // Add a new deck
   const handleAddDeck = () => {
     if (!newDeckName.trim()) {
       alert('Deck name is required!');
       return;
     }
     const newDeck = {
-      id: Date.now(), // Unique ID for the deck
+      id: Date.now(),
       name: newDeckName,
       description: newDeckDescription,
-      cards: [], // Initialize with an empty cards array
+      cards: [],
     };
-    saveDeck(newDeck); // Save the new deck
-    setDecks(getDecks()); // Refresh the list of decks
-    setNewDeckName(''); // Reset input fields
+    saveDeck(newDeck);
+    setDecks(getDecks());
+    setNewDeckName('');
     setNewDeckDescription('');
   };
 
-  // Delete a deck
   const handleDeleteDeck = (id) => {
     if (window.confirm('Are you sure you want to delete this deck?')) {
-      deleteDeck(id); // Remove the deck
-      setDecks(getDecks()); // Refresh the list of decks
+      deleteDeck(id);
+      setDecks(getDecks());
     }
   };
 
@@ -46,7 +45,6 @@ const DecksPage = () => {
       <Navbar />
       <main className="decks-main">
         <h1>My Decks</h1>
-        {/* Add Deck Form */}
         <div className="add-deck-form">
           <input
             type="text"
@@ -64,7 +62,6 @@ const DecksPage = () => {
             + Add Deck
           </button>
         </div>
-        {/* Deck List */}
         <div className="decks-list">
           {decks.length === 0 ? (
             <p>No decks available. Create one to get started!</p>
@@ -73,7 +70,12 @@ const DecksPage = () => {
               <div className="deck-item" key={deck.id}>
                 <h3>{deck.name}</h3>
                 <p>{deck.description}</p>
-                <button className="edit-button">View/Edit</button>
+                <button
+                  className="edit-button"
+                  onClick={() => navigate(`/deck/${deck.id}`)} // Corrected navigation
+                >
+                  View/Edit
+                </button>
                 <button
                   className="delete-button"
                   onClick={() => handleDeleteDeck(deck.id)}
