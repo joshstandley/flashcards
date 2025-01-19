@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import '../styles/DecksPage.css';
 import { getDecks, deleteDeck } from '../utils/deckUtils';
 
-const DecksPage = ({ onNavigate }) => {
+const DecksPage = () => {
   const [decks, setDecks] = useState([]);
 
+  // Load decks from localStorage
   useEffect(() => {
     setDecks(getDecks());
   }, []);
@@ -19,9 +19,9 @@ const DecksPage = ({ onNavigate }) => {
   };
 
   return (
-    <div className="decks-page">
-      <Navbar onNavigate={onNavigate} />
-      <main>
+    <div className="decks-container">
+      <Navbar />
+      <main className="decks-main">
         <h1>My Decks</h1>
         <button className="create-deck-button">+ Create New Deck</button>
         <div className="decks-list">
