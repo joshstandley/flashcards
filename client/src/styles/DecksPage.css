@@ -91,6 +91,7 @@
 .edit-button {
   background-color: #ffc107;
   color: #333;
+  margin-right: 10px; /* Add space between the buttons */
 }
 
 .edit-button:hover {
