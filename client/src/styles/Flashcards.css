@@ -1,0 +1,48 @@
+/* Wrapper for the entire flashcards component */
+.flashcards-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space out the arrows and card */
+  width: 100%; /* Full width of the parent container */
+  max-width: 800px; /* Optional: Restrict maximum width */
+  margin: 0 auto; /* Center the container horizontally */
+  gap: 20px; /* Add consistent spacing between arrows and card */
+  padding: 20px; /* Add breathing room */
+}
+
+/* Arrow container */
+.arrow-container {
+  flex: 0 0 auto; /* Prevent arrows from stretching */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Fixed width for arrows */
+  height: 100%; /* Match the height of the card */
+}
+
+/* Arrow buttons */
+.flashcards-arrow {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.flashcards-arrow:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.flashcards-arrow:hover:not(:disabled) {
+  color: #0056b3;
+}
+
+/* Flashcard container */
+.flashcard-container {
+  flex: 1; /* Allow the card to fill the remaining space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
