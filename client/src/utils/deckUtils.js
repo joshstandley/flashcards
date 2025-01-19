@@ -1,56 +1,21 @@
-import DeckModel from '../models/DeckModel';
-import { saveToLocalStorage, getFromLocalStorage } from './storageUtils';
+const DECKS_KEY = 'flashcards_decks';
 
-// Local storage key for user-created decks
-const USER_DECK_STORAGE_KEY = 'user-decks';
-
-// Predefined decks
-const predefinedDecks = [
-  new DeckModel('Math', 'deck-math'),
-  new DeckModel('Science', 'deck-science'),
-];
-
-// Add sample cards to predefined decks
-predefinedDecks[0].addCard('What is 2 + 2?', '4');
-predefinedDecks[0].addCard('What is 5 x 3?', '15');
-predefinedDecks[1].addCard('What is H2O?', 'Water');
-predefinedDecks[1].addCard('What planet is closest to the Sun?', 'Mercury');
-
-/**
- * Get all decks, combining predefined and user-created decks.
- * @returns {Array} Array of all decks.
- */
+// Get all decks from localStorage
 export const getDecks = () => {
-  const userDecks = getFromLocalStorage(USER_DECK_STORAGE_KEY) || [];
-  return [...predefinedDecks, ...userDecks];
+  const decks = localStorage.getItem(DECKS_KEY);
+  return decks ? JSON.parse(decks) : [];
 };
 
-/**
- * Create and save a new user-defined deck.
- * @param {string} name - The name of the deck.
- * @returns {DeckModel} The newly created deck.
- */
-export const createDeck = (name) => {
-  const newDeck = new DeckModel(name);
-  const userDecks = getFromLocalStorage(USER_DECK_STORAGE_KEY) || [];
-  userDecks.push(newDeck);
-  saveToLocalStorage(USER_DECK_STORAGE_KEY, userDecks);
-  return newDeck;
+// Save a deck to localStorage
+export const saveDeck = (deck) => {
+  const decks = getDecks();
+  const updatedDecks = [...decks, deck];
+  localStorage.setItem(DECKS_KEY, JSON.stringify(updatedDecks));
 };
 
-/**
- * Save a flashcard to a specific deck.
- * @param {string} deckId - The ID of the deck.
- * @param {string} question - The question for the flashcard.
- * @param {string} answer - The answer for the flashcard.
- */
-export const addCardToDeck = (deckId, question, answer) => {
-  const userDecks = getFromLocalStorage(USER_DECK_STORAGE_KEY) || [];
-  const updatedDecks = userDecks.map((deck) => {
-    if (deck.id === deckId) {
-      deck.cards.push({ question, answer, id: `card-${Date.now()}` });
-    }
-    return deck;
-  });
-  saveToLocalStorage(USER_DECK_STORAGE_KEY, updatedDecks);
+// Delete a deck from localStorage
+export const deleteDeck = (id) => {
+  const decks = getDecks();
+  const updatedDecks = decks.filter((deck) => deck.id !== id);
+  localStorage.setItem(DECKS_KEY, JSON.stringify(updatedDecks));
 };

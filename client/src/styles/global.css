@@ -57,6 +57,19 @@ html, body {
   cursor: pointer;
 }
 
+/* Link Styling for Navbar */
+.navbar-menu-item a,
+.navbar-logo a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+  font-size: inherit; /* Inherit font size */
+}
+
+.navbar-menu-item a:hover,
+.navbar-logo a:hover {
+  color: #d4e157; /* Maintain hover effect */
+}
+
 @media (max-width: 768px) {
   .navbar-menu {
     flex-direction: column;
@@ -112,7 +125,6 @@ html, body {
   .home-main h1 {
     font-size: 2rem;
   }
-
   .home-main p {
     font-size: 1rem;
   }
