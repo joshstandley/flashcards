@@ -18,23 +18,38 @@
   color: #007bff;
 }
 
-.create-deck-button {
-  display: block;
-  margin: 20px auto;
+/* Add Deck Form */
+.add-deck-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-deck-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.add-deck-form button {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 16px;
+  cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
-.create-deck-button:hover {
+.add-deck-form button:hover {
   background-color: #0056b3;
 }
 
+/* Deck List */
 .decks-list {
   display: flex;
   flex-direction: column;
