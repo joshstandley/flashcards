@@ -2,42 +2,48 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { getDecks, saveDeck } from '../utils/deckUtils';
-import '../styles/global.css'; // Ensure global styles are applied
-import '../styles/DeckPage.css'; // Scoped styles for DeckPage
+import { getDecks, updateDeck } from '../utils/deckUtils'; // Corrected import
+import '../styles/global.css';
+import '../styles/DeckPage.css';
 
 const DeckPage = () => {
-  const { id } = useParams(); // Get the deck ID from the route
+  const { id } = useParams();
   const navigate = useNavigate();
   const [deck, setDeck] = useState(null);
   const [newCardQuestion, setNewCardQuestion] = useState('');
   const [newCardAnswer, setNewCardAnswer] = useState('');
 
-  // Load the deck data
   useEffect(() => {
     const decks = getDecks();
     const currentDeck = decks.find((d) => d.id === parseInt(id));
     if (!currentDeck) {
       alert('Deck not found!');
-      navigate('/decks'); // Redirect if deck doesn't exist
+      navigate('/decks');
     } else {
       setDeck(currentDeck);
     }
   }, [id, navigate]);
 
-  // Add a new card to the deck
   const handleAddCard = () => {
     if (!newCardQuestion.trim() || !newCardAnswer.trim()) {
       alert('Both question and answer are required!');
       return;
     }
+
+    const newCard = {
+      id: Date.now(), // Unique ID for the card
+      question: newCardQuestion,
+      answer: newCardAnswer,
+    };
+
     const updatedDeck = {
       ...deck,
-      cards: [...deck.cards, { question: newCardQuestion, answer: newCardAnswer }],
+      cards: [...deck.cards, newCard],
     };
-    saveDeck(updatedDeck); // Update the deck in localStorage
-    setDeck(updatedDeck); // Update the state
-    setNewCardQuestion(''); // Reset input fields
+
+    updateDeck(updatedDeck); // Use updateDeck instead of saveDeck
+    setDeck(updatedDeck);
+    setNewCardQuestion('');
     setNewCardAnswer('');
   };
 
@@ -49,7 +55,6 @@ const DeckPage = () => {
           <>
             <h1>{deck.name}</h1>
             <p>{deck.description}</p>
-            {/* Add Card Form */}
             <div className="add-card-form">
               <input
                 type="text"
@@ -65,13 +70,12 @@ const DeckPage = () => {
               />
               <button onClick={handleAddCard}>+ Add Card</button>
             </div>
-            {/* List of Cards */}
             <div className="cards-list">
               {deck.cards.length === 0 ? (
                 <p>No cards in this deck. Add some to get started!</p>
               ) : (
-                deck.cards.map((card, index) => (
-                  <div className="card-item" key={index}>
+                deck.cards.map((card) => (
+                  <div className="card-item" key={card.id}>
                     <p>
                       <strong>Q:</strong> {card.question}
                     </p>

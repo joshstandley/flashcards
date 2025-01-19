@@ -6,16 +6,36 @@ export const getDecks = () => {
   return decks ? JSON.parse(decks) : [];
 };
 
-// Save a deck to localStorage
-export const saveDeck = (deck) => {
+// Save all decks to localStorage
+export const saveDecks = (decks) => {
+  localStorage.setItem(DECKS_KEY, JSON.stringify(decks));
+};
+
+// Add a new deck to localStorage
+export const addDeck = (deck) => {
   const decks = getDecks();
   const updatedDecks = [...decks, deck];
-  localStorage.setItem(DECKS_KEY, JSON.stringify(updatedDecks));
+  saveDecks(updatedDecks);
+};
+
+// Update an existing deck in localStorage
+export const updateDeck = (updatedDeck) => {
+  const decks = getDecks();
+  const updatedDecks = decks.map((deck) =>
+    deck.id === updatedDeck.id ? updatedDeck : deck
+  );
+  saveDecks(updatedDecks);
 };
 
 // Delete a deck from localStorage
 export const deleteDeck = (id) => {
   const decks = getDecks();
   const updatedDecks = decks.filter((deck) => deck.id !== id);
-  localStorage.setItem(DECKS_KEY, JSON.stringify(updatedDecks));
+  saveDecks(updatedDecks);
+};
+
+// Get a specific deck by ID
+export const getDeckById = (id) => {
+  const decks = getDecks();
+  return decks.find((deck) => deck.id === id) || null;
 };
