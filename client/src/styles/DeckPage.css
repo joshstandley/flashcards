@@ -1,0 +1,81 @@
+/* Deck Page Styles */
+.deck-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .deck-main {
+    flex: 1;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .deck-main h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+  
+  .deck-main p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  /* Add Card Form */
+  .add-card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .add-card-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .add-card-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .add-card-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Cards List */
+  .cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .card-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .card-item:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-item p {
+    margin: 5px 0;
+    color: #333;
+  }
+  

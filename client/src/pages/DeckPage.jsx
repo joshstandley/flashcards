@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { getDecks, saveDeck } from '../utils/deckUtils';
-import '../styles/global.css';
+import '../styles/global.css'; // Ensure global styles are applied
+import '../styles/DeckPage.css'; // Scoped styles for DeckPage
 
 const DeckPage = () => {
   const { id } = useParams(); // Get the deck ID from the route
@@ -41,7 +42,7 @@ const DeckPage = () => {
   };
 
   return (
-    <div className="deck-page">
+    <div className="deck-container">
       <Navbar />
       <main className="deck-main">
         {deck && (
